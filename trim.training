@@ -1,0 +1,17 @@
+#!/usr/bin/perl -w
+
+# ismael.gutierrez-fernandez@jci.ac.uk
+# Script to run trimnomatic for multiple samples
+
+## First we indicate the path and direcftory where the files are sotored and where the output will be saved
+my $read_path_triticum = ""; # Define the irectory with the files
+my $output_dir = ""; # Define the directory wehre trimned files were will be stored (output)
+
+## Secondly we specified the input of the samples. Previously, we need to make a .txt file with all the samples (see examples):
+my $input_list_dir = ""; # Path for the folder where the list of samples is stored
+my $input_for_trim = ""; # Path for the list.txt of samples itself
+my $adapter_dir = ""; # Path for the adapter files to run the trimnomatic
+
+###############################################
+
+# 
