@@ -56,9 +56,17 @@ print SLURM "\ncd $read_path_triticum\n";
 
 print SLURM "set -e\n"
 
-print SLURM "source package 50fcf79b-73a3-4f94-9553-5ed917823423\n";
+print SLURM "source package 50fcf79b-73a3-4f94-9553-5ed917823423\n"; # Loading the software
 
+### Do not need to change this bit! ###
+print SLURM "trimmomatic PE -phred33 -threads 4 $f1 $f2 $output_dir/$sample"."_1.paired.fq.gz $output_dir/$sample"."_1.unpaired.fq.gz $output_dir/$sample"."_2.paired.fq.gz $output_dir/$sample"."_2.unpaired.fq.gz ILLUMINACLIP:$adapter_dir/TruSeq3-PE.fa:2:30:10 LEADING:3 SLIDINGWINDOW:4:15 MINLEN:108\n";
 
+close SLURM;
+system("sbatch $tmp_file");
+# Unlink $tmp_file;
+}
+
+close(INPUT_FILE);
 
 
 
