@@ -3,8 +3,8 @@
 # ismael.gutierrez-fernandez@jci.ac.uk
 # Script to run trimnomatic for multiple samples
 
-## First we indicate the path and direcftory where the files are sotored and where the output will be saved
-my $read_path_triticum = ""; # Define the irectory with the files
+## Firstly we indicate the path and direcftory where the files are sotored and where the output will be saved
+my $read_path_triticum = ""; # Define the directory with the files
 my $output_dir = ""; # Define the directory wehre trimned files were will be stored (output)
 
 ## Secondly we specified the input of the samples. Previously, we need to make a .txt file with all the samples (see examples):
@@ -14,4 +14,22 @@ my $adapter_dir = ""; # Path for the adapter files to run the trimnomatic
 
 ###############################################
 
-# 
+## Now, the array of the files needs to be built.
+# Open the input file (.txt), previousy defined, and go through the lines one by one so go to each directory where the fastq.gz should be located
+chdir("$input_list_dir") or die "coulnd't open the input directory"; # Indicate wwhere the input directory defined above is located
+
+open (INPUT_FILE, "$input_for_trim") || die "couldn't open the input file $input_for_trim!"; # Open the the input file with the list of the samples (and called INPUT_FILE?)
+    while (my $line = <INPUT_FILE>) {
+		chomp $line; # remove the last trailing newline from the $line
+my @array = split(\t/,$line); # Cut, or separate, the string ($line) in smaller sections or pieces by the element indicated. In this case \t/ split following the intros
+#print "\nmyline was: 4line\n";
+
+#print "\nmy array: @array\n";
+#print "\narray element 1: @array[0]\n";
+
+my $sample = $array[0];
+my $f1 = $array[1];
+my $f2 = $array[2];
+
+chdir("$read_path_triticum") or die "could'nt move to specific read directory $read_path_triticum"; # Here we return to the folder were the raw files are stored
+
